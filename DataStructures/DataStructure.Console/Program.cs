@@ -2,6 +2,7 @@
 using DataStructures.Structures.Graphs;
 using DataStructures.Structures.Misc;
 using DataStructures.Structures.SortAlgorithm;
+using System;
 
 Graph graph = new Graph(5);
 
@@ -71,21 +72,46 @@ watch.Stop();
 
 Console.WriteLine(string.Format($"{keyToFind} - {watch.ElapsedMilliseconds} - {valueObj}"));
 
+Random randNum = new Random();
+int Min = 0, Max = 100;
 
 Console.WriteLine("===========Quick sort==========");
 
-int[] array = { 8, 2, 5, 3, 9, 4, 7, 6, 1 };
+int[] array = Enumerable
+    .Repeat(0, 10)
+    .Select(i => randNum.Next(Min, Max))
+    .ToArray();
 
 ISortStrategy sortStrategy = new QuickSort();
 
 sortStrategy.Sort(array);
 
-for (int i = 0; i< array.Length; i++)
-{
-    Console.Write($"{array[i]} ");
-}
-Console.WriteLine();
+Helper<int>.PrintArray(array);
 
+Console.WriteLine("===========Merget sort==========");
+
+int[] array1 = Enumerable
+    .Repeat(0, 10)
+    .Select(i => randNum.Next(Min, Max))
+    .ToArray();
+
+ISortStrategy sortStrategy1 = new MergeSort();
+
+sortStrategy1.Sort(array1);
+
+Helper<int>.PrintArray(array1);
+
+int[] array2 = Enumerable
+    .Repeat(0, 10)
+    .Select(i => randNum.Next(Min, Max))
+    .ToArray();
+
+Console.WriteLine("===========Find Nth Item==========");
+Console.WriteLine($"3 Largest number in array is {FindNthItem.LargestItem(array2, 3)}");
+Console.WriteLine($"4 Smallest number in array is {FindNthItem.SmallestItem(array2, 4)}");
+sortStrategy1.Sort(array2);
+
+Helper<int>.PrintArray(array2);
 
 
 
